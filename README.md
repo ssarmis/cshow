@@ -1,10 +1,10 @@
-### How to build
+# How to build
 
 - clone the repository
 - on windows run ```nmake -s```
 - on linux run ```make -s```
 
-### How to use
+# How to use
 
 ## Existing commands
 
