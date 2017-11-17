@@ -1,0 +1,41 @@
+:borderless 1280 768
+
+:v3 bgcolor 100 80 60
+:v3 tcolor 240 240 240
+:v3 shcolor 20 20 20
+:v2 title_pos 20 20
+:v2 shtitle_pos 16 16
+
+:s
+
+:b :c $bgcolor
+
+:t :p $title_pos        :c $shcolor     :s 64 "cshow" 
+:t :p $shtitle_pos      :c $tcolor      :s 64 "cshow"
+
+:t :p 20 116     :c $tcolor      :s 32 "- portable"
+:t :p 20 148    :c $tcolor      :s 32 "- simple"
+:t :p 20 180    :c $tcolor      :s 32 "- fast"
+
+:i :p 256 10    :s 1008 749     "imgs/00.png"
+
+:e
+
+:s
+
+:b :c $bgcolor
+
+:t :p $title_pos        :c $shcolor     :s 64 "What it can do" 
+:t :p $shtitle_pos      :c $tcolor      :s 64 "What it can do"
+
+:t :p 20 116    :c $tcolor              :s 32 "- looks good (sometimes)"
+:t :p 20 148    :c $tcolor              :s 32 "- supports videos"
+:t :p 20 180    :c $tcolor   :b 0 0 0   :s 32 "- text with the background color of your choice"
+:t :p 20 212    :c $tcolor              :s 32 "- custom 32x32 cursor"
+:t :p 20 244    :c $tcolor              :s 32 "- draw with your mouse on the slide"
+:t :p 20 276    :c $tcolor              :s 32 "- insert images"
+:t :p 20 308    :c $tcolor              :s 32 "- choose whether you want it fullscreen or borderless"
+
+:vi :p 200 350 :s 480 340 "vids/00.mp4"
+
+:e
