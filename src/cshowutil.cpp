@@ -280,6 +280,7 @@ namespace cshow {
 			switch (line[strIndex]) {
 
 				case 't': { // weird goto behaivour
+					// @TODO fix the : after " being considered a parameter
 					std::string text;
 					Uint32 size;
 					vec3 color = NULL_VEC3;

@@ -13,7 +13,7 @@
 :t :p $title_pos        :c $shcolor     :s 64 "cshow" 
 :t :p $shtitle_pos      :c $tcolor      :s 64 "cshow"
 
-:t :p 20 116     :c $tcolor      :s 32 "- portable"
+:t :p 20 116    :c $tcolor      :s 32 "- portable"
 :t :p 20 148    :c $tcolor      :s 32 "- simple"
 :t :p 20 180    :c $tcolor      :s 32 "- fast"
 
@@ -35,7 +35,27 @@
 :t :p 20 244    :c $tcolor              :s 32 "- draw with your mouse on the slide"
 :t :p 20 276    :c $tcolor              :s 32 "- insert images"
 :t :p 20 308    :c $tcolor              :s 32 "- choose whether you want it fullscreen or borderless"
+:t :p 20 340    :c $tcolor              :s 32 "- has variables"
 
-:vi :p 200 350 :s 480 340 "vids/00.mp4"
+:vi :p 400 350 :s 480 340 "vids/00.mp4"
+
+:e
+
+:s
+
+:b :c $bgcolor
+
+:t :p $title_pos        :c $shcolor     :s 64 "How to use it" 
+:t :p $shtitle_pos      :c $tcolor      :s 64 "How to use it"
+
+:t :p 20 116                :c $tcolor      :s 54 "Making a slide"
+
+:t :p 20 170  :b 20 20 20   :c $tcolor      :s 32 ":s"
+:t :p 112 170               :c $tcolor      :s 32 "<- marks the beginning of a slide"
+
+# Bugs everywhere, I am so happy
+
+:t :p 20 202  :b 20 20 20   :c $tcolor      :s 32 ":e"
+:t :p 112 202               :c $tcolor      :s 32 "<- marks the end of a slide"
 
 :e
