@@ -1,8 +1,7 @@
 # How to build
 
 - clone the repository
-- on windows run ```nmake -s```
-- on linux run ```make -s```
+- run ```nmake -s```
 
 # How to use
 
