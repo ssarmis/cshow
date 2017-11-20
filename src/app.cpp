@@ -50,6 +50,10 @@ namespace cshow {
 						if (event.key.keysym.sym == SDLK_LEFT) {
 							slidemanager::previousSlide();
 						}
+
+						if (event.key.keysym.sym == SDLK_ESCAPE) {
+							sdlWindow.setRunning(false);
+						}
 						break;
 					case SDL_QUIT:
 						sdlWindow.setRunning(false);
@@ -73,10 +77,8 @@ namespace cshow {
             ((rectangle*)*i)->render();
 
         if (SDL_GetMouseState(x, y) & SDL_BUTTON(SDL_BUTTON_RIGHT)){
-			for(auto&& rect : trace){
-				trace.remove(rect);
-				delete rect;
-			} 
+			for(auto&& rect : trace) delete rect;
+			trace.clear();
             slidemanager::getCurrentSlide().clearScreen(renderer);
         } 
 
@@ -87,12 +89,7 @@ namespace cshow {
     }
 
     app::~app(){
-
-		for(auto&& rect : trace){
-			trace.remove(rect);
-			delete rect;
-		}
-
+		for(auto&& rect : trace) delete rect;
 		trace.clear();
 	    SDL_FreeCursor(cursor);
     	SDL_FreeSurface(cursorSurface);

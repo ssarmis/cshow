@@ -22,6 +22,7 @@
 #include <string>
 #include <sstream>
 #include <iterator>
+#include <memory>
 #include <list>
 
 #include "window.h"
@@ -34,12 +35,12 @@ namespace cshow {
     class app {
 
         private:
-            int32_t                         x[1], y[1];
-            rectangle                       mouseRect;
-	        SDL_Cursor*                     cursor;
-            SDL_Surface*                    cursorSurface;
-            SDL_Renderer*                   renderer;
-            std::list<rectangle*>           trace;
+            int32_t                 x[1], y[1];
+            rectangle               mouseRect;
+	        SDL_Cursor*             cursor;
+            SDL_Surface*            cursorSurface;
+            SDL_Renderer*           renderer;
+            std::list<rectangle*>   trace;
 
         public:
             
