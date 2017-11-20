@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -37,7 +37,7 @@ namespace cshow {
 	// @TODO maybe change the return type to bool and see
 	// if there were any problems in clearing the memory
 	template<class T> void cclearv(std::vector<T>& vector) {
-		for (Uint32 i = 0; i < vector.size(); i++) vector[i].clear();
+		for (uint32_t i = 0; i < vector.size(); i++) vector[i].clear();
 		vector.clear();
 	}
 
@@ -49,7 +49,7 @@ namespace cshow {
 
 		FILE* file = fopen(path, "rt");
 		fseek(file, 0, SEEK_END);
-		Uint32 size = ftell(file);
+		uint32_t size = ftell(file);
 		buffer = new char[size + 1];
 		memset(buffer, 0, size + 1);
 		fseek(file, 0, SEEK_SET);
@@ -63,15 +63,15 @@ namespace cshow {
 		return result;
 	}
 
-	bool icheckArgumentVals(Uint32& toChange, const std::string& line, Uint32 index) {
+	bool icheckArgumentVals(uint32_t& toChange, const std::string& line, uint32_t index) {
 		index++;
 		int32_t arg[1] = { -1 }; // how many args
 		int32_t r[1] = { false }; // wich one has a variable as parameter
 
-		Uint32 tmpIndex = index;
+		uint32_t tmpIndex = index;
 		std::stringstream ss(line.substr(++index, line.size()));
 
-		for (Uint32 i = 0; i < 1; i++) {
+		for (uint32_t i = 0; i < 1; i++) {
 			while ((line[tmpIndex] == ' ' || line[tmpIndex] == '\t')) tmpIndex++; // skips spaces and tabs
 			if (line[tmpIndex] == '$') {
 				r[i] = true;
@@ -95,15 +95,15 @@ namespace cshow {
 		toChange = arg[0];
 		return true;
 	}
-	bool v2checkArgumentVals(vec2& toChange, const std::string& line, Uint32 index) {
+	bool v2checkArgumentVals(vec2& toChange, const std::string& line, uint32_t index) {
 		bool r[2] = { false, false };
 		int32_t arg[2] = { -1, -1 };
 
 		std::stringstream ss(line.substr(++index, line.size()));
 
-		Uint32 tmpIndex = index;
+		uint32_t tmpIndex = index;
 
-		for (Uint32 i = 0; i < 2; i++) {
+		for (uint32_t i = 0; i < 2; i++) {
 			while ((line[tmpIndex] == ' ' || line[tmpIndex] == '\t')) tmpIndex++;
 			if (line[tmpIndex] == '$') {
 				std::string variableName;
@@ -139,14 +139,14 @@ namespace cshow {
 		toChange = vec2(arg[0], arg[1]);
 		return true;
 	}
-	bool v3checkArgumentVals(vec3& toChange, const std::string& line, Uint32 index) {
+	bool v3checkArgumentVals(vec3& toChange, const std::string& line, uint32_t index) {
 		std::stringstream ss(line.substr(++index, line.size()));
-		Uint32 tmpIndex = index;
+		uint32_t tmpIndex = index;
 
 		bool r[3] = { false, false, false };
 		int32_t arg[3] = { -1, -1, -1 };
 
-		for (Uint32 i = 0; i < 3; i++) {
+		for (uint32_t i = 0; i < 3; i++) {
 			while ((line[tmpIndex] == ' ' || line[tmpIndex] == '\t')) tmpIndex++;
 			if (line[tmpIndex] == '$') {
 				r[i] = true;
@@ -190,7 +190,7 @@ namespace cshow {
 		return true;
 	}
 	
-	void checkTextLineParams(const std::string& line, Uint32 index, std::string& text, vec3& background, vec3& color, vec2& position, Uint32& size) {
+	void checkTextLineParams(const std::string& line, uint32_t index, std::string& text, vec3& background, vec3& color, vec2& position, uint32_t& size) {
 		switch (line[index]) {
 		case 's': {
 			if (!icheckArgumentVals(size, line, index));
@@ -213,7 +213,7 @@ namespace cshow {
 			break;
 		}
 	}
-	void checkImageParams(const std::string& line, Uint32 index, vec2& position, vec2& size) {
+	void checkImageParams(const std::string& line, uint32_t index, vec2& position, vec2& size) {
 		switch (line[index]) {
 		case 's': {
 			if (!v2checkArgumentVals(size, line, index));
@@ -227,7 +227,7 @@ namespace cshow {
 			break;
 		}
 	}
-	void checkVideoParams(const std::string& line, Uint32 index, vec2& position, vec2& size) {
+	void checkVideoParams(const std::string& line, uint32_t index, vec2& position, vec2& size) {
 		switch (line[index]) {
 		case 's': {
 			if (!v2checkArgumentVals(size, line, index));
@@ -241,7 +241,7 @@ namespace cshow {
 			break;
 		}
 	}
-	void checkColorParams(const std::string& line, Uint32 index, vec3& color) {
+	void checkColorParams(const std::string& line, uint32_t index, vec3& color) {
 		switch (line[index]) {
 			case 'c': {
 				if (!v3checkArgumentVals(color, line, index));
@@ -251,7 +251,7 @@ namespace cshow {
 				break;
 		}
 	}
-	void checkRectParams(const std::string& line, Uint32 index, vec2& position, vec3& background, vec2& size) {
+	void checkRectParams(const std::string& line, uint32_t index, vec2& position, vec3& background, vec2& size) {
 		switch (line[index]) {
 		case 's': {
 			if (!v2checkArgumentVals(size, line, index));
@@ -275,21 +275,21 @@ namespace cshow {
 		// @TODO need to change this... so that it does ignore '#'
 		// add tab allower so that some lines can start with multiple tabs
 		if (line[0] == ':') {
-			Uint32 strIndex = 1;
+			uint32_t strIndex = 1;
 
 			switch (line[strIndex]) {
 
 				case 't': { // weird goto behaivour
 					// @TODO fix the : after " being considered a parameter
 					std::string text;
-					Uint32 size;
+					uint32_t size;
 					vec3 color = NULL_VEC3;
 					vec3 background = NULL_VEC3;
 					vec2 position = NULL_VEC2;
 
-					Uint32 st = line.find("\"");
-					Uint32 fn = line.find("\"", st + 2);
-					Uint32 index = 0;
+					uint32_t st = line.find("\"");
+					uint32_t fn = line.find("\"", st + 2);
+					uint32_t index = 0;
 
 					std::istringstream cpy(line);
 					std::string wline;
@@ -301,14 +301,14 @@ namespace cshow {
 						checkTextLineParams(wline, 0, text, background, color, position, size);
 					}
 				
-					for (Uint32 i = st + 1; i < fn; i++) ss << line[i];
+					for (uint32_t i = st + 1; i < fn; i++) ss << line[i];
 					text = ss.str();
 
 					// If needed to change the default values, heres where
 					if (color == NULL_VEC3) color = DEFAULT_VEC3; else DEFAULT_VEC3 = color;
 					if (position == NULL_VEC2) position = DEFAULT_VEC2; else DEFAULT_VEC2 = position;
 
-					currentSlide.textLines.emplace_back(textline(renderer, text, background, color, position, size));
+					currentSlide.staticComponents.emplace_back(new textline(renderer, text, background, color, position, size));
 
 					break;
 				}
@@ -336,9 +336,9 @@ namespace cshow {
 					vec2 position = NULL_VEC2;
 					vec2 size = NULL_VEC2;
 
-					Uint32 st = line.find("\"");
-					Uint32 fn = line.find("\"", st + 2);
-					Uint32 index = 0;
+					uint32_t st = line.find("\"");
+					uint32_t fn = line.find("\"", st + 2);
+					uint32_t index = 0;
 
 					std::istringstream cpy(line);
 					std::string wline;
@@ -350,13 +350,13 @@ namespace cshow {
 						checkImageParams(wline, 0, position, size);
 					}
 
-					for (Uint32 i = st + 1; i < fn; i++) ss << line[i];
+					for (uint32_t i = st + 1; i < fn; i++) ss << line[i];
 					path = ss.str();
 
 					if (size == NULL_VEC2) size = DEFAULT_VEC2; else DEFAULT_VEC2 = size;
 					if (position == NULL_VEC2) position = DEFAULT_VEC2; else DEFAULT_VEC2 = position;
 
-					currentSlide.images.emplace_back(image(renderer, path, position, size));
+					currentSlide.staticComponents.emplace_back(new image(renderer, path, position, size));
 
 					break;
 				}
@@ -367,9 +367,9 @@ namespace cshow {
 						vec2 position = NULL_VEC2;
 						vec2 size = NULL_VEC2;
 
-						Uint32 st = line.find("\"");
-						Uint32 fn = line.find("\"", st + 2);
-						Uint32 index = 0;
+						uint32_t st = line.find("\"");
+						uint32_t fn = line.find("\"", st + 2);
+						uint32_t index = 0;
 
 						std::istringstream cpy(line);
 						std::string wline;
@@ -381,13 +381,13 @@ namespace cshow {
 							checkVideoParams(wline, 0, position, size);
 						}
 
-						for (Uint32 i = st + 1; i < fn; i++) ss << line[i];
+						for (uint32_t i = st + 1; i < fn; i++) ss << line[i];
 						path = ss.str();
 
 						if (size == NULL_VEC2) size = DEFAULT_VEC2; else DEFAULT_VEC2 = size;
 						if (position == NULL_VEC2) position = DEFAULT_VEC2; else DEFAULT_VEC2 = position;
 
-						currentSlide.videos.emplace_back(video(renderer, path, position, size));
+						currentSlide.dynamicComponents.emplace_back(new video(renderer, path, position, size));
 						//currentSlide.noRefresh();
 					}
 					break;
@@ -413,7 +413,7 @@ namespace cshow {
 					if (color == NULL_VEC3) color = DEFAULT_VEC3; else DEFAULT_VEC3 = color;
 					if (position == NULL_VEC2) position = DEFAULT_VEC2; else DEFAULT_VEC2 = position;
 
-					currentSlide.rects.emplace_back(rectangle(renderer, position, background, size));
+					currentSlide.staticComponents.emplace_back(new rectangle(renderer, position, background, size));
 
 					break;
 				}
@@ -427,14 +427,14 @@ namespace cshow {
 
 	void initializeGlobalVariables(const std::string& line) {
 		if (line[0] == ':') {
-			Uint32 strIndex = 1;
+			uint32_t strIndex = 1;
 
 			switch (line[strIndex]) {
 			case 'v': { // weird goto behaivour
 				switch (line[strIndex + 1]) {
 				case ' ': {
 					std::string variableName;
-					Uint32 value;
+					uint32_t value;
 
 					std::stringstream gv(line.substr(++strIndex, line.size()));
 					gv >> variableName;

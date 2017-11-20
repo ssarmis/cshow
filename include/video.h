@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -21,6 +21,7 @@
 
 #include "vec2.h"
 #include "fadecomponent.h"
+#include "dynamiccomponent.h"
 
 extern "C" { 
 	#include <libavcodec/avcodec.h>
@@ -29,7 +30,7 @@ extern "C" {
 }
 namespace cshow {
 	// @TODO  : public slidecomponent
-	class video : public fadecomponent {
+	class video : public fadecomponent, public dynamiccomponent {
 
 		private:
 			bool				interrupt;
@@ -47,7 +48,7 @@ namespace cshow {
 			Uint8*				yPlane;
 			Uint8*				uPlane; 
 			Uint8*				vPlane;
-			Uint32				yPlaneSz, uvPlaneSz;
+			uint32_t			yPlaneSz, uvPlaneSz;
 			struct SwsContext*	sws_ctx;
 			int					uvPitch;
  			int					videoStream;
@@ -56,9 +57,10 @@ namespace cshow {
 		public:
 			video() = default;
 			video(SDL_Renderer* renderer, const std::string& path, const vec2& position, const vec2& size);
-
+			~video();
+			
 			void clear();
-			void render();
+			void render() override;
 	};
 
 }

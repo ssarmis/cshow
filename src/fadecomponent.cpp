@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //

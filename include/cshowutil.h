@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -33,14 +33,14 @@ namespace cshow {
 	template<class T> void cclearv(std::vector<T>& vector);
 	std::string sreadfile(const char* path);
 
-	bool icheckArgumentVals(Uint32& toChange, const std::string& line, Uint32 index);
-	bool v3checkArgumentVals(vec3& toChange, const std::string& line, Uint32 index);
-	bool v2checkArgumentVals(vec2& toChange, const std::string& line, Uint32 index);
+	bool icheckArgumentVals(uint32_t& toChange, const std::string& line, uint32_t index);
+	bool v3checkArgumentVals(vec3& toChange, const std::string& line, uint32_t index);
+	bool v2checkArgumentVals(vec2& toChange, const std::string& line, uint32_t index);
 
-	void checkTextLineParams(const std::string& line, Uint32 index, std::string& text, vec3& background, vec3& color, vec2& position, Uint32& size);
-	void checkImageParams(const std::string& line, Uint32 index, vec2& position, vec2& size);
-	void checkVideoParams(const std::string& line, Uint32 index, vec2& position, vec2& size);
-	void checkColorParams(const std::string& line, Uint32 index, vec3& color);
+	void checkTextLineParams(const std::string& line, uint32_t index, std::string& text, vec3& background, vec3& color, vec2& position, uint32_t& size);
+	void checkImageParams(const std::string& line, uint32_t index, vec2& position, vec2& size);
+	void checkVideoParams(const std::string& line, uint32_t index, vec2& position, vec2& size);
+	void checkColorParams(const std::string& line, uint32_t index, vec3& color);
 
 	void interpretSlideCode(SDL_Renderer* renderer, slide& currentSlide, const std::string& line);
 	void initializeGlobalVariables(const std::string& line);

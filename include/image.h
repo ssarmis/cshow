@@ -15,37 +15,37 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program, if not, see <http://www.gnu.org/licenses/>.
 
-#include "rectangle.h"
+#pragma once
+
+#include <SDL.h>
+#include <SDL_Image.h>
+#include <string>
+
+#include "vec2.h"
+#include "fadecomponent.h"
+#include "staticcomponent.h"
 
 namespace cshow {
 
+	class image : public fadecomponent, public staticcomponent {
 
-	rectangle::rectangle(SDL_Renderer* renderer, const vec2& position, const vec3& background, const vec2& size)
-		:renderer(renderer), position(position), size(size) {
+		private:
+			SDL_Renderer*	renderer;
+			SDL_Texture*	texture;
+			SDL_Rect		destination;
+			vec2			position;
+			vec2			size;
 
+		public:
 
-		destination.x = position.x;
-		destination.y = position.y;
-		destination.w = size.x;
-		destination.h = size.y;
+			image() = default;
+			image(SDL_Renderer* renderer, const std::string& path, const vec2& position, const vec2& size);
+			~image();
 
-		SDL_Surface* rect;
-		rect = SDL_CreateRGBSurface(0, size.x, size.y, 32, 0, 0, 0, 0);
-		SDL_FillRect(rect, NULL, SDL_MapRGB(rect->format, background.x, background.y, background.z));
-
-		texture = SDL_CreateTextureFromSurface(renderer, rect);
-		SDL_FreeSurface(rect);
-
-		initBlend(texture);
-	}
-
-	void rectangle::render() {
-		SDL_RenderCopy(renderer, texture, NULL, &destination);
-	}
-
-	rectangle::~rectangle() {
-		SDL_DestroyTexture(texture);
-	}
+			inline SDL_Texture* getTexture() { return texture; }
+			void clear();
+			void render() override;
+	};
 
 
 }

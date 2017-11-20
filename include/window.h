@@ -15,37 +15,39 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program, if not, see <http://www.gnu.org/licenses/>.
 
-#include "rectangle.h"
+#pragma once
+
+#include <SDL.h>
+#include <SDL_ttf.h>
+#include <SDL_Image.h>
+
+#include "slidemanager.h"
+#include "slidefilereader.h"
+#include "vec3.h"
 
 namespace cshow {
 
 
-	rectangle::rectangle(SDL_Renderer* renderer, const vec2& position, const vec3& background, const vec2& size)
-		:renderer(renderer), position(position), size(size) {
+	class window {
+
+		private:
+			bool			running;
+			SDL_Window*		sdlWindow;
+			uint32_t		width;
+			uint32_t		height;
 
 
-		destination.x = position.x;
-		destination.y = position.y;
-		destination.w = size.x;
-		destination.h = size.y;
+		public:
+			window();
+			window(const vec3& properties);
+			window(uint32_t width, uint32_t height, const char* title);
+			~window();
 
-		SDL_Surface* rect;
-		rect = SDL_CreateRGBSurface(0, size.x, size.y, 32, 0, 0, 0, 0);
-		SDL_FillRect(rect, NULL, SDL_MapRGB(rect->format, background.x, background.y, background.z));
-
-		texture = SDL_CreateTextureFromSurface(renderer, rect);
-		SDL_FreeSurface(rect);
-
-		initBlend(texture);
-	}
-
-	void rectangle::render() {
-		SDL_RenderCopy(renderer, texture, NULL, &destination);
-	}
-
-	rectangle::~rectangle() {
-		SDL_DestroyTexture(texture);
-	}
-
+			void setRunning(bool running);
+			uint32_t getWidth() const;
+			uint32_t getHeight() const;
+			bool getRunning() const;
+			SDL_Window* getWindow() const;
+	};
 
 }

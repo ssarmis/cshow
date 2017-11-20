@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -17,27 +17,13 @@
 
 #pragma once
 
-
-#include <vector>
-
-#include "slide.h"
-
 namespace cshow {
 
-	class slidemanager {
+    class dynamiccomponent {
+        
+        public:
+            virtual void render() = 0;
 
-		private:
-			static std::vector<slide>	slideVector;
-			static Uint32				index;
-			
-		public:
-			slidemanager();
-
-			static slide getCurrentSlide();
-			static void pushSlideToQueue(const slide& slide);
-			static void nextSlide();
-			static void previousSlide();
-			static void clearSlides();
-	};
+    };
 
 }

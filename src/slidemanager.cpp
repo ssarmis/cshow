@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -20,7 +20,7 @@
 namespace cshow {
 
 	std::vector<slide> slidemanager::slideVector;
-	Uint32 slidemanager::index = 0;
+	uint32_t slidemanager::index = 0;
 
 	slidemanager::slidemanager() { }
 
@@ -43,7 +43,7 @@ namespace cshow {
 	}
 
 	void slidemanager::clearSlides() {
-		for (Uint32 i = 0; i < slideVector.size(); i++) {
+		for (uint32_t i = 0; i < slideVector.size(); i++) {
 			slideVector[i].clear();
 		}
 		

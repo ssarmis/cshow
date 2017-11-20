@@ -15,28 +15,32 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program, if not, see <http://www.gnu.org/licenses/>.
 
-#include "image.h"
+#pragma once
+
+#include <iostream> // for ostream
 
 namespace cshow {
 
-	image::image(SDL_Renderer* renderer, const std::string& path, const vec2& position, const vec2& size)
-	:renderer(renderer), position(position), size(size) {
-		texture = IMG_LoadTexture(renderer, path.c_str());
+	struct vec2 {
+		
+		int x, y;
 
-		initBlend(texture);
+		static vec2 zero;
 
-		destination.x = position.x;
-		destination.y = position.y;
-		destination.w = size.x;
-		destination.h = size.y;
-	}
+		vec2();
+		vec2(int x, int y);
 
-	void image::render() {
-		SDL_RenderCopy(renderer, texture, NULL, &destination);
-	}
+		vec2& add(const vec2& other);
+		vec2& substract(const vec2& other);
+		vec2& multiply(const vec2& other);
+		vec2& divide(const vec2& other);
 
-	image::~image(){
-		SDL_DestroyTexture(texture);
-	}
+		friend vec2 operator+(vec2 left, const vec2& right);
+		friend vec2 operator-(vec2 left, const vec2& right);
+		friend vec2 operator*(vec2 left, const vec2& right);
+		friend vec2 operator/(vec2 left, const vec2& right);
+		friend bool operator==(const vec2& left, const vec2& right);
+		friend std::ostream& operator<<(std::ostream& os, const vec2& vec);
+	};
 
 }

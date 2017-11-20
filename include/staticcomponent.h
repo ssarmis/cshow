@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -17,30 +17,13 @@
 
 #pragma once
 
-#include <iostream> // for ostream
-
 namespace cshow {
 
-	struct vec2 {
-		
-		int x, y;
+    class staticcomponent {
+        
+        public:
+            virtual void render() = 0;
 
-		static vec2 zero;
-
-		vec2();
-		vec2(int x, int y);
-
-		vec2& add(const vec2& other);
-		vec2& substract(const vec2& other);
-		vec2& multiply(const vec2& other);
-		vec2& divide(const vec2& other);
-
-		friend vec2 operator+(vec2 left, const vec2& right);
-		friend vec2 operator-(vec2 left, const vec2& right);
-		friend vec2 operator*(vec2 left, const vec2& right);
-		friend vec2 operator/(vec2 left, const vec2& right);
-		friend bool operator==(const vec2& left, const vec2& right);
-		friend std::ostream& operator<<(std::ostream& os, const vec2& vec);
-	};
+    };
 
 }

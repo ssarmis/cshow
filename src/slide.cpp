@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -23,7 +23,7 @@ namespace cshow {
 
 	slide::slide() {}
 
-	slide::slide(SDL_Renderer* renderer, Uint32 width, Uint32 height):width(width), height(height),
+	slide::slide(SDL_Renderer* renderer, uint32_t width, uint32_t height):width(width), height(height),
 	backgroundColor(vec3()), renderer(renderer) {}
 
 	void slide::eventHandling(const SDL_Event& event) {
@@ -41,53 +41,52 @@ namespace cshow {
 		if(canRefresh){
 			clearScreen(renderer);
 			noRefresh();
-			renderComponents(renderer);
+			renderStaticComponents(renderer);
 		}
-		for (Uint32 i = 0; i < videos.size(); i++) videos[i].render();
+		renderDynamicComponents(renderer);
+		// for (uint32_t i = 0; i < videos.size(); i++) videos[i].render();
 	}
 
 	void slide::setBackground(const vec3& color) {
 		backgroundColor = color;
 	}
 
-
 	void slide::clear() {
-		for (Uint32 i = 0; i < images.size(); i++) images[i].clear();
-		for (Uint32 i = 0; i < textLines.size(); i++) textLines[i].clear();
-		for (Uint32 i = 0; i < rects.size(); i++) rects[i].clear();
-		for (Uint32 i = 0; i < videos.size(); i++) videos[i].clear();
+		for(auto elem : staticComponents) delete elem;
+		for(auto elem : dynamicComponents) delete elem;
+
+		/*
+		for (uint32_t i = 0; i < images.size(); i++) images[i].clear();
+		for (uint32_t i = 0; i < textLines.size(); i++) textLines[i].clear();
+		for (uint32_t i = 0; i < rects.size(); i++) rects[i].clear();
+		for (uint32_t i = 0; i < videos.size(); i++) videos[i].clear();
+		*/
 	}
 
 	void slide::initSelect() {
 		canRefresh = true;
-		//for (Uint32 i = 0; i < videos.size(); i++) videos[i].resetInterrupt();
-		/* @OldCode
-		for (int i = 0; i < images.size(); i++) {
-			// @TODO
-			// condition to see if elements are only for some moments visible, not from the start
-			images[i].setMaxAlpha();
-		}
-
-		for (int i = 0; i < textLines.size(); i++) {
-			textLines[i].setMaxAlpha();
-		}
-
-		for (int i = 0; i < videos.size(); i++) {
-			videos[i].setMaxAlpha();
-		}
-		*/
 	}
 
 	void slide::clearScreen(SDL_Renderer* renderer){
 		SDL_SetRenderDrawColor(renderer, backgroundColor.x, backgroundColor.y, backgroundColor.z, 255);
 		SDL_RenderClear(renderer);
+		canRefresh = true;
 	}
 
-	void slide::renderComponents(SDL_Renderer* renderer){
-		for (Uint32 i = 0; i < images.size(); i++) images[i].render();
-		for (Uint32 i = 0; i < textLines.size(); i++) textLines[i].render();
-		for (Uint32 i = 0; i < rects.size(); i++) rects[i].render();
+	void slide::renderStaticComponents(SDL_Renderer* renderer){
+		 for (std::list<staticcomponent*>::iterator i = staticComponents.begin(); i != staticComponents.end(); i++)
+            ((staticcomponent*)*i)->render();
+		/*
+		for (uint32_t i = 0; i < images.size(); i++) images[i].render();
+		for (uint32_t i = 0; i < textLines.size(); i++) textLines[i].render();
+		for (uint32_t i = 0; i < rects.size(); i++) rects[i].render();
+		*/
 	}
+
+	void slide::renderDynamicComponents(SDL_Renderer* renderer){
+ 		for (std::list<dynamiccomponent*>::iterator i = dynamicComponents.begin(); i != dynamicComponents.end(); i++)
+            ((dynamiccomponent*)*i)->render();
+	} 
 
 	void slide::noRefresh() {
 		canRefresh = false;

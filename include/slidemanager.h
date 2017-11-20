@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -17,34 +17,27 @@
 
 #pragma once
 
-#include <SDL.h>
-#include <SDL_ttf.h>
 
-#include "vec2.h"
-#include "vec3.h"
-#include "fadecomponent.h"
+#include <vector>
+
+#include "slide.h"
 
 namespace cshow {
 
-
-	class textline : public fadecomponent {
+	class slidemanager {
 
 		private:
-			std::string			text;
-			vec3				color;
-			vec2				position;
-			Uint32				size;
-			SDL_Texture*		Message;
-			SDL_Rect			Message_rect;
-			SDL_Renderer*		renderer;
-			SDL_Surface*		surfaceMessage;
-
+			static std::vector<slide>	slideVector;
+			static uint32_t				index;
+			
 		public:
-			textline() = default;
-			textline(SDL_Renderer* renderer, const std::string& text, const vec3& background, const vec3& color, const vec2& position, Uint32 size);
+			slidemanager();
 
-			void clear();
-			void render();
+			static slide getCurrentSlide();
+			static void pushSlideToQueue(const slide& slide);
+			static void nextSlide();
+			static void previousSlide();
+			static void clearSlides();
 	};
 
 }

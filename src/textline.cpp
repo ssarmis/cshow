@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -19,7 +19,7 @@
 
 namespace cshow {
 
-	textline::textline(SDL_Renderer* renderer, const std::string& text, const vec3& background, const vec3& color, const vec2& position, Uint32 size)
+	textline::textline(SDL_Renderer* renderer, const std::string& text, const vec3& background, const vec3& color, const vec2& position, uint32_t size)
 		:text(text), color(color), position(position), size(size), renderer(renderer) {
 		
 		TTF_Font* Sans = TTF_OpenFont("fonts/Sansation-Bold.ttf", size);
@@ -55,7 +55,7 @@ namespace cshow {
 		SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
 	}
 
-	void textline::clear() {
+	textline::~textline() {
 		SDL_FreeSurface(surfaceMessage);
 	}
 

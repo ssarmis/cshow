@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -25,7 +25,7 @@ namespace cshow {
 	window::window(const vec3& properties):
 	window(properties.z > 0 ? properties.x : 0, properties.z > 0 ? properties.y : 0, "cshow presentation"){}
 
-	window::window(Uint32 width, Uint32 height, const char* title):width(width), height(height){
+	window::window(uint32_t width, uint32_t height, const char* title):width(width), height(height){
 		SDL_Init(SDL_INIT_VIDEO);
 		TTF_Init();
 		IMG_Init(IMG_INIT_PNG);
@@ -49,60 +49,34 @@ namespace cshow {
 
 		if (sdlWindow == NULL) {
 			std::cout << "For some reason I cannot make a window..." << std::endl;
-			running = false;
-		} else running = true;
+			setRunning(false);
+		} else setRunning(true);
 	}
 
-	void window::run(SDL_Renderer* renderer, void(*renderCallback)(void), const slidefilereader& reader) {
-		SDL_Event event;
+	void window::setRunning(bool running){
+		this->running = running;
+	}
 
-		// @CleanUp
-		Uint32 time = 0;
-		Uint32 fps = 0;
-		Uint32 then = SDL_GetTicks();
+	uint32_t window::getWidth() const {
+		return width;
+	}
 
-		if(running) reader.proccessFile(renderer, width, height);
+	uint32_t window::getHeight() const {
+		return height;
+	}
 
-		while (running) {
-			SDL_Delay(1000 / 60); // reducing cpu usage ALOT, poor way to handle frame rate
-			Uint32 now = SDL_GetTicks();
-
-			while (SDL_PollEvent(&event)) {
-				slidemanager::getCurrentSlide().eventHandling(event);
-
-				switch (event.type) {
-					case SDL_KEYUP:
-						break;
-
-					case SDL_KEYDOWN:
-						if (event.key.keysym.sym == SDLK_RIGHT) {
-							slidemanager::nextSlide();
-						}
-
-						if (event.key.keysym.sym == SDLK_LEFT) {
-							slidemanager::previousSlide();
-						}
-						break;
-					case SDL_QUIT:
-						running = false;
-						break;
-				}
-			}
-			
-			renderCallback();
-
-		}
-
-		cshow::slidemanager::clearSlides();
-		SDL_DestroyWindow(sdlWindow);
-		SDL_Quit();
+	bool window::getRunning() const {
+		return running;
 	}
 
 	SDL_Window* window::getWindow() const {
 		return sdlWindow;
 	}
 
+
 	window::~window() {
+		cshow::slidemanager::clearSlides();
+		SDL_DestroyWindow(sdlWindow);
 		IMG_Quit();
 		TTF_Quit();
 		SDL_Quit();

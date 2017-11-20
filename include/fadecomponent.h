@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -18,33 +18,25 @@
 #pragma once
 
 #include <SDL.h>
-#include <SDL_Image.h>
-#include <string>
-
-#include "vec2.h"
-#include "fadecomponent.h"
+#include <iostream>
+#include <inttypes.h>
 
 namespace cshow {
 
-	class image : public fadecomponent{
+	class fadecomponent {
 
-		private:
-			SDL_Renderer*	renderer;
-			SDL_Texture*	texture;
-			SDL_Rect		destination;
-			vec2			position;
-			vec2			size;
+		protected:
+			Uint8 alpha;
 
 		public:
+			SDL_Texture* texture;
 
-			image() = default;
-			image(SDL_Renderer* renderer, const std::string& path, const vec2& position, const vec2& size);
+			void initBlend(SDL_Texture* texture);
+			void setMaxAlpha();
+			void setMinAlpha();
+			void fadeIn();
+			void fadeOut();
 
-
-			inline SDL_Texture* getTexture() { return texture; }
-			void clear();
-			void render();
 	};
-
 
 }

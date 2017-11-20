@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -17,10 +17,11 @@
 
 #pragma once
 
+#include <list>
 #include <SDL.h>
 #include <string>
-#include <vector>
 #include <iostream>
+#include <iterator>
 
 #include "vec2.h"
 #include "vec3.h"
@@ -28,6 +29,9 @@
 #include "image.h"
 #include "video.h"
 #include "rectangle.h"
+#include "dynamiccomponent.h"
+#include "staticcomponent.h"
+
 
 namespace cshow {
 
@@ -37,8 +41,8 @@ namespace cshow {
 
 		private:
 			static bool 			canRefresh;
-			Uint32					width;
-			Uint32					height;
+			uint32_t				width;
+			uint32_t				height;
 			vec3					backgroundColor;
 			SDL_Renderer*			renderer;
 			SDL_Surface*			bgrect;
@@ -46,21 +50,32 @@ namespace cshow {
 			SDL_Rect				bg;
 
 		public:
+			std::list<dynamiccomponent*> dynamicComponents;
+			std::list<staticcomponent*> staticComponents;
+			
+			/*
 			std::vector<textline>	textLines;
 			std::vector<image>		images;
 			std::vector<rectangle>	rects;
 			std::vector<video>		videos;
-			
-			slide();
-			slide(SDL_Renderer* renderer, Uint32 width, Uint32 height);
+			*/
 
+			slide();
+			slide(SDL_Renderer* renderer, uint32_t width, uint32_t height);
+			
 			void eventHandling(const SDL_Event& event);
+
 			void setBackground(const vec3& color);
+
 			void initSelect();
+
 			void render(SDL_Renderer* renderer);
-			void renderComponents(SDL_Renderer* renderer);
+			void renderStaticComponents(SDL_Renderer* renderer);
+			void renderDynamicComponents(SDL_Renderer* renderer);
+
 			void clearScreen(SDL_Renderer* renderer);
 			void clear();
+
 			void noRefresh();
 	};
 

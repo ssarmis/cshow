@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -147,7 +147,7 @@ namespace cshow {
 			}
 	}
 
-	void video::clear() {
+	video::~video() {
 		// Free the YUV frame
 		av_frame_free(&pFrame);
 		free(yPlane);

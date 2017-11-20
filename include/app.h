@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -15,37 +15,41 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program, if not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#define KB(x) ((1 << 10) * (x))
 
 #include <SDL.h>
-#include <SDL_ttf.h>
-#include <SDL_Image.h>
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <iterator>
+#include <list>
 
+#include "window.h"
+#include "rectangle.h"
 #include "slidemanager.h"
 #include "slidefilereader.h"
-#include "vec3.h"
 
 namespace cshow {
 
+    class app {
 
-	class window {
+        private:
+            int32_t                         x[1], y[1];
+            rectangle                       mouseRect;
+	        SDL_Cursor*                     cursor;
+            SDL_Surface*                    cursorSurface;
+            SDL_Renderer*                   renderer;
+            std::list<cshow::rectangle>     trace;
 
-		private:
-			bool			running;
-			SDL_Window*		sdlWindow;
-			Uint32			width;
-			Uint32			height;
+        public:
+            
+            app() = default;
+            ~app();
+
+            void run(window& sdlWindow, const slidefilereader& reader);
+            void render();
 
 
-		public:
-			window();
-			window(const vec3& properties);
-			window(Uint32 width, Uint32 height, const char* title);
-			~window();
-
-			void run(SDL_Renderer* renderer, void(*renderCallback)(void), const slidefilereader& reader);
-
-			SDL_Window* getWindow() const;
-	};
+    };
 
 }

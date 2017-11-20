@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -17,26 +17,30 @@
 
 #pragma once
 
-#include <SDL.h>
-#include <iostream>
-#include <inttypes.h>
+#include <iostream> // for ostream
 
 namespace cshow {
 
-	class fadecomponent {
+	struct vec3 {
+		
+		int x, y, z;
 
-		protected:
-			Uint8 alpha;
+		static vec3 zero;
 
-		public:
-			SDL_Texture* texture;
+		vec3();
+		vec3(int x, int y, int z);
 
-			void initBlend(SDL_Texture* texture);
-			void setMaxAlpha();
-			void setMinAlpha();
-			void fadeIn();
-			void fadeOut();
+		vec3& add(const vec3& other);
+		vec3& substract(const vec3& other);
+		vec3& multiply(const vec3& other);
+		vec3& divide(const vec3& other);
 
+		friend vec3 operator+(vec3 left, const vec3& right);
+		friend vec3 operator-(vec3 left, const vec3& right);
+		friend vec3 operator*(vec3 left, const vec3& right);
+		friend vec3 operator/(vec3 left, const vec3& right);
+		friend bool operator==(const vec3& left, const vec3& right);
+		friend std::ostream& operator<<(std::ostream& os, const vec3& vec);
 	};
 
 }

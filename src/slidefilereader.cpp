@@ -1,4 +1,4 @@
-//  cshow a simple slide show program.
+//	cshow a simple slide show program.
 //
 //	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
 //
@@ -37,7 +37,7 @@ namespace cshow {
 			std::string rem = c.substr(11, mode.size());
 			std::cout << rem;
 			std::stringstream ss(rem);
-			Uint32 w, h;
+			uint32_t w, h;
 
 			ss >> w >> h;
 			
@@ -48,7 +48,7 @@ namespace cshow {
 
 	}
 
-	void slidefilereader::proccessFile(SDL_Renderer* renderer, Uint32 width, Uint32 height) const{
+	void slidefilereader::proccessFile(SDL_Renderer* renderer, uint32_t width, uint32_t height) const{
 		// @TODO add debug re-reading
 		slidemanager::clearSlides();
 
