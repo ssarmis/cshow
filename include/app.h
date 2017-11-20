@@ -39,7 +39,7 @@ namespace cshow {
 	        SDL_Cursor*                     cursor;
             SDL_Surface*                    cursorSurface;
             SDL_Renderer*                   renderer;
-            std::list<cshow::rectangle>     trace;
+            std::list<rectangle*>           trace;
 
         public:
             

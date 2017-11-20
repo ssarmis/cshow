@@ -65,24 +65,35 @@ namespace cshow {
     void app::render() {
 	
         if(SDL_GetMouseState(x, y) & SDL_BUTTON(SDL_BUTTON_LEFT))
-            trace.emplace_back(rectangle(renderer, vec2(*x, *y), vec3(255, 0, 0), vec2(3, 3)));
+            trace.emplace_back(new rectangle(renderer, vec2(*x, *y), vec3(255, 0, 0), vec2(3, 3)));
 
         if (trace.size() * sizeof(rectangle) > KB(32)) trace.pop_front();
         // @TODO need to free whats in the rectangle
+        for (std::list<rectangle*>::iterator i = trace.begin(); i != trace.end(); i++)
+            ((rectangle*)*i)->render();
+
         if (SDL_GetMouseState(x, y) & SDL_BUTTON(SDL_BUTTON_RIGHT)){
-            trace.clear();
+			for(auto&& rect : trace){
+				trace.remove(rect);
+				delete rect;
+			} 
             slidemanager::getCurrentSlide().clearScreen(renderer);
         } 
 
         slidemanager::getCurrentSlide().render(renderer);
 
-        for (std::list<rectangle>::iterator i = trace.begin(); i != trace.end(); i++)
-            ((rectangle)*i).render();
+		SDL_RenderPresent(renderer);
 
-        SDL_RenderPresent(renderer);
     }
 
     app::~app(){
+
+		for(auto&& rect : trace){
+			trace.remove(rect);
+			delete rect;
+		}
+
+		trace.clear();
 	    SDL_FreeCursor(cursor);
     	SDL_FreeSurface(cursorSurface);
     }
