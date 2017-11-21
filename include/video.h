@@ -45,9 +45,9 @@ namespace cshow {
 			AVCodec*			pCodec = NULL;
 			AVFrame*			pFrame = NULL;
 			AVPacket			packet;
-			Uint8*				yPlane;
-			Uint8*				uPlane; 
-			Uint8*				vPlane;
+			uint8_t*			yPlane;
+			uint8_t*			uPlane; 
+			uint8_t*			vPlane;
 			uint32_t			yPlaneSz, uvPlaneSz;
 			struct SwsContext*	sws_ctx;
 			int					uvPitch;

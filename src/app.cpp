@@ -36,7 +36,7 @@ namespace cshow {
 			SDL_Delay(1000 / 100); // reducing cpu usage ALOT, poor way to handle frame rate
 
 			while (SDL_PollEvent(&event)) {
-				slidemanager::getCurrentSlide().eventHandling(event);
+				slidemanager::getCurrentSlide()->eventHandling(event);
 
 				switch (event.type) {
 					case SDL_KEYUP:
@@ -54,7 +54,9 @@ namespace cshow {
 						if (event.key.keysym.sym == SDLK_ESCAPE) {
 							sdlWindow.setRunning(false);
 						}
+
 						break;
+						
 					case SDL_QUIT:
 						sdlWindow.setRunning(false);
 						break;
@@ -79,17 +81,17 @@ namespace cshow {
         if (SDL_GetMouseState(x, y) & SDL_BUTTON(SDL_BUTTON_RIGHT)){
 			for(auto&& rect : trace) delete rect;
 			trace.clear();
-            slidemanager::getCurrentSlide().clearScreen(renderer);
+            slidemanager::getCurrentSlide()->clearScreen(renderer);
         } 
 
-        slidemanager::getCurrentSlide().render(renderer);
+        slidemanager::getCurrentSlide()->render(renderer);
 
 		SDL_RenderPresent(renderer);
 
     }
 
     app::~app(){
-		for(auto&& rect : trace) delete rect;
+		for(auto rect : trace) delete rect;
 		trace.clear();
 	    SDL_FreeCursor(cursor);
     	SDL_FreeSurface(cursorSurface);

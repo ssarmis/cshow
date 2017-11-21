@@ -26,7 +26,7 @@ namespace cshow {
 	class fadecomponent {
 
 		protected:
-			Uint8 alpha;
+			uint8_t alpha;
 
 		public:
 			SDL_Texture* texture;

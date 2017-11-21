@@ -101,9 +101,9 @@ namespace cshow {
 		// set up YV12 pixel array (12 bits per pixel)
 		yPlaneSz = pCodecCtx->width * pCodecCtx->height;
 		uvPlaneSz = pCodecCtx->width * pCodecCtx->height / 4;
-		yPlane = (Uint8*)malloc(yPlaneSz);
-		uPlane = (Uint8*)malloc(uvPlaneSz);
-		vPlane = (Uint8*)malloc(uvPlaneSz);
+		yPlane = (uint8_t*)malloc(yPlaneSz);
+		uPlane = (uint8_t*)malloc(uvPlaneSz);
+		vPlane = (uint8_t*)malloc(uvPlaneSz);
 		if (!yPlane || !uPlane || !vPlane)
 			std::cout << "Could not allocate pixel buffers" << std::endl;
 

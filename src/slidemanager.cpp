@@ -19,33 +19,32 @@
 
 namespace cshow {
 
-	std::vector<slide> slidemanager::slideVector;
+	std::vector<slide*> slidemanager::slideVector;
 	uint32_t slidemanager::index = 0;
 
 	slidemanager::slidemanager() { }
 
-	slide slidemanager::getCurrentSlide() {
+	slide* slidemanager::getCurrentSlide() {
 		return slideVector[index];
 	}
 
-	void slidemanager::pushSlideToQueue(const slide& slide) {
+	void slidemanager::pushSlideToQueue(slide* slide) {
 		slideVector.emplace_back(slide);
 	}
 
 	void slidemanager::nextSlide() {
 		if(index < slideVector.size() - 1) index++;
-		slideVector[index].initSelect();
+		slideVector[index]->initSelect();
 	}
 
 	void slidemanager::previousSlide() {
 		if (index > 0) index--;
-		slideVector[index].initSelect();
+		slideVector[index]->initSelect();
 	}
 
 	void slidemanager::clearSlides() {
-		for (uint32_t i = 0; i < slideVector.size(); i++) {
-			slideVector[i].clear();
-		}
+		for (uint32_t i = 0; i < slideVector.size(); i++)
+			delete slideVector[i];
 		
 		slideVector.clear();
 	}

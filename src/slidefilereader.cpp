@@ -48,15 +48,13 @@ namespace cshow {
 
 	}
 
-	void slidefilereader::proccessFile(SDL_Renderer* renderer, uint32_t width, uint32_t height) const{
-		// @TODO add debug re-reading
-		slidemanager::clearSlides();
-
+	void slidefilereader::proccessFile(SDL_Renderer* renderer, uint32_t width, uint32_t height) const {
 		std::istringstream ss(file);
 		std::string line;
 
 		bool startInterprating = false;
-		slide newSlide(renderer, width, height);
+
+		slide* newSlide = new slide(renderer, width, height);
 		
 		std::getline(ss, line); // skip the first line
 
@@ -67,7 +65,8 @@ namespace cshow {
 
 			if (line[0] == ':' && line[1] == 'e') {
 				slidemanager::pushSlideToQueue(newSlide);
-				newSlide = slide(renderer, width, height);
+				startInterprating = false;
+				newSlide = new slide(renderer, width, height);
 			}
 		}
 	};

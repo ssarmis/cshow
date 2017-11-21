@@ -44,23 +44,17 @@ namespace cshow {
 			renderStaticComponents(renderer);
 		}
 		renderDynamicComponents(renderer);
-		// for (uint32_t i = 0; i < videos.size(); i++) videos[i].render();
 	}
 
 	void slide::setBackground(const vec3& color) {
 		backgroundColor = color;
 	}
 
-	void slide::clear() {
+	slide::~slide() {
 		for(auto elem : staticComponents) delete elem;
 		for(auto elem : dynamicComponents) delete elem;
-
-		/*
-		for (uint32_t i = 0; i < images.size(); i++) images[i].clear();
-		for (uint32_t i = 0; i < textLines.size(); i++) textLines[i].clear();
-		for (uint32_t i = 0; i < rects.size(); i++) rects[i].clear();
-		for (uint32_t i = 0; i < videos.size(); i++) videos[i].clear();
-		*/
+		staticComponents.clear();
+		dynamicComponents.clear();
 	}
 
 	void slide::initSelect() {

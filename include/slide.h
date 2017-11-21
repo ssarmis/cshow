@@ -40,29 +40,20 @@ namespace cshow {
 	class slide {
 
 		private:
-			static bool 			canRefresh;
-			uint32_t				width;
-			uint32_t				height;
-			vec3					backgroundColor;
-			SDL_Renderer*			renderer;
-			SDL_Surface*			bgrect;
-			SDL_Texture*			bgtxt;
-			SDL_Rect				bg;
+			static bool 	canRefresh;
+			uint32_t		width;
+			uint32_t		height;
+			vec3			backgroundColor;
+			SDL_Renderer*	renderer;
 
 		public:
 			std::list<dynamiccomponent*> dynamicComponents;
 			std::list<staticcomponent*> staticComponents;
-			
-			/*
-			std::vector<textline>	textLines;
-			std::vector<image>		images;
-			std::vector<rectangle>	rects;
-			std::vector<video>		videos;
-			*/
 
 			slide();
 			slide(SDL_Renderer* renderer, uint32_t width, uint32_t height);
-			
+			~slide();
+
 			void eventHandling(const SDL_Event& event);
 
 			void setBackground(const vec3& color);
@@ -74,8 +65,7 @@ namespace cshow {
 			void renderDynamicComponents(SDL_Renderer* renderer);
 
 			void clearScreen(SDL_Renderer* renderer);
-			void clear();
-
+			
 			void noRefresh();
 	};
 
