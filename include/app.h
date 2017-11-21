@@ -47,7 +47,7 @@ namespace cshow {
             app() = default;
             ~app();
 
-            void run(window& sdlWindow, const slidefilereader& reader);
+            void run(const char* path, window& sdlWindow, const slidefilereader& reader);
             void render();
 
 

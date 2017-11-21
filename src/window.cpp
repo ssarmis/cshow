@@ -35,7 +35,7 @@ namespace cshow {
 			SDL_GetCurrentDisplayMode(0, &current);
 
 			sdlWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-				current.w, current.h, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
+				current.w, current.h, SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS);
 			
 			this->width = current.w;
 			this->height = current.h;

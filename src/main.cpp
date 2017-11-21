@@ -15,16 +15,20 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program, if not, see <http://www.gnu.org/licenses/>.
 
+
+#ifdef _WIN32
+	#include <windows.h>
+	#undef main
+#else
+	#error "This cannot be build on other platforms other then windows at the moment"
+#endif
+
 #include <SDL.h>
 #include <iostream>
 
 #include "window.h"
 #include "app.h"
 
-#ifdef _WIN32
-#include <windows.h>
-#undef main
-#endif
 
 int main(int argc, char *argv[]) {
 
@@ -39,8 +43,7 @@ int main(int argc, char *argv[]) {
 	cshow::window sdlWindow(reader.processHeader());
 	cshow::app App;
 
-	//FreeConsole();
-	App.run(sdlWindow, reader);
+	App.run(argv[0], sdlWindow, reader);
 
 	return 0;
 }

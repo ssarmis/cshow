@@ -35,7 +35,6 @@ namespace cshow {
 		else if(mode[0] == 'b'){
 
 			std::string rem = c.substr(11, mode.size());
-			std::cout << rem;
 			std::stringstream ss(rem);
 			uint32_t w, h;
 

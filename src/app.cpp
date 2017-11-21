@@ -19,12 +19,20 @@
 
 namespace cshow {
 
-    void app::run(window& sdlWindow, const slidefilereader& reader){
+    void app::run(const char* path, window& sdlWindow, const slidefilereader& reader){
         SDL_Event event;
         
+		std::string resPath(path, strlen(path) - 9);
+		resPath.append("\\res\\");
+
+		std::string cursorPath = resPath;
+		cursorPath.append("cursor.png");
+
+		std::cout << cursorPath << std::endl;
+
         renderer = SDL_CreateRenderer(sdlWindow.getWindow(), -1, SDL_RENDERER_ACCELERATED);
         
-        cursorSurface = IMG_Load("cursor.png");
+        cursorSurface = IMG_Load(cursorPath.c_str());
 	    cursor = SDL_CreateColorCursor(cursorSurface, 0, 0);
 
 	    SDL_SetCursor(cursor);
@@ -32,7 +40,9 @@ namespace cshow {
 
 		reader.proccessFile(renderer, sdlWindow.getWidth(), sdlWindow.getHeight());
 
-		while (sdlWindow.getRunning()) {
+		bool running = sdlWindow.getRunning();
+
+		while (running) {
 			SDL_Delay(1000 / 100); // reducing cpu usage ALOT, poor way to handle frame rate
 
 			while (SDL_PollEvent(&event)) {
@@ -52,17 +62,19 @@ namespace cshow {
 						}
 
 						if (event.key.keysym.sym == SDLK_ESCAPE) {
-							sdlWindow.setRunning(false);
+							// @FixMe
+							running = false;
 						}
 
 						break;
 						
 					case SDL_QUIT:
-						sdlWindow.setRunning(false);
+						// @FixMe
+						running = false;
 						break;
 				}
 			}
-			
+
 			render();
 		}
 
@@ -74,8 +86,8 @@ namespace cshow {
             trace.emplace_back(new rectangle(renderer, vec2(*x, *y), vec3(255, 0, 0), vec2(3, 3)));
 
         if (trace.size() * sizeof(rectangle) > KB(32)) trace.pop_front();
-        // @TODO need to free whats in the rectangle
-        for (std::list<rectangle*>::iterator i = trace.begin(); i != trace.end(); i++)
+
+		for (std::list<rectangle*>::iterator i = trace.begin(); i != trace.end(); i++)
             ((rectangle*)*i)->render();
 
         if (SDL_GetMouseState(x, y) & SDL_BUTTON(SDL_BUTTON_RIGHT)){
@@ -91,7 +103,7 @@ namespace cshow {
     }
 
     app::~app(){
-		for(auto rect : trace) delete rect;
+		for(auto&& rect : trace) delete rect;
 		trace.clear();
 	    SDL_FreeCursor(cursor);
     	SDL_FreeSurface(cursorSurface);

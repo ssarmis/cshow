@@ -44,7 +44,10 @@ namespace cshow {
 			std::cout << "Couldn't find stream information" << std::endl;
 
 		// Dump information about file onto standard error
+		/*
 		av_dump_format(pFormatCtx, 0, path.c_str(), 0);
+		std::cout << std::endl;
+		*/
 		
 		// Find the first video stream
 		std::cout << pFormatCtx->nb_streams << std::endl;
