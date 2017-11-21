@@ -22,6 +22,7 @@
 #include "app.h"
 
 #ifdef _WIN32
+#include <windows.h>
 #undef main
 #endif
 
@@ -33,10 +34,12 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
+
 	cshow::slidefilereader reader(argv[1]);
 	cshow::window sdlWindow(reader.processHeader());
 	cshow::app App;
 
+	//FreeConsole();
 	App.run(sdlWindow, reader);
 
 	return 0;

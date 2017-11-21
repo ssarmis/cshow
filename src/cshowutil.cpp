@@ -489,4 +489,12 @@ namespace cshow {
 			}
 		}
 	}
+	/*
+	static void Debug(const char* msg){
+		std::cout << msg << std::endl;
+		#ifdef _WIN32
+		system("pause");
+		#endif WIN32
+	}
+	*/
 }
