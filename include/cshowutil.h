@@ -42,7 +42,7 @@ namespace cshow {
 	void checkVideoParams(const std::string& line, uint32_t index, vec2& position, vec2& size);
 	void checkColorParams(const std::string& line, uint32_t index, vec3& color);
 
-	void interpretSlideCode(SDL_Renderer* renderer, slide* currentSlide, const std::string& line);
+	void interpretSlideCode(SDL_Renderer* renderer, const std::string& fontPath, slide* currentSlide, const std::string& line);
 	void initializeGlobalVariables(const std::string& line);
 
 }

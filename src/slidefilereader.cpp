@@ -47,7 +47,7 @@ namespace cshow {
 
 	}
 
-	void slidefilereader::proccessFile(SDL_Renderer* renderer, uint32_t width, uint32_t height) const {
+	void slidefilereader::proccessFile(SDL_Renderer* renderer, const std::string& fontPath, uint32_t width, uint32_t height) const {
 		std::istringstream ss(file);
 		std::string line;
 
@@ -60,7 +60,7 @@ namespace cshow {
 		while (std::getline(ss, line)) {
 			initializeGlobalVariables(line);
 			if (line[0] == ':' && line[1] == 's') startInterprating = true;
-			if (startInterprating) interpretSlideCode(renderer, newSlide, line);
+			if (startInterprating) interpretSlideCode(renderer, fontPath, newSlide, line);
 
 			if (line[0] == ':' && line[1] == 'e') {
 				manager->pushSlideToQueue(newSlide);

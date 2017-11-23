@@ -33,6 +33,7 @@ namespace cshow {
 		public:
 			slidemanager();
 			~slidemanager();
+			slidemanager(const slidemanager& other);
 
 			slide* getCurrentSlide();
 			void pushSlideToQueue(slide* slide);

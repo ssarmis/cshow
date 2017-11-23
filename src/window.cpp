@@ -26,9 +26,6 @@ namespace cshow {
 	window(properties.z > 0 ? properties.x : 0, properties.z > 0 ? properties.y : 0, "cshow presentation"){}
 
 	window::window(uint32_t width, uint32_t height, const char* title):width(width), height(height){
-		SDL_Init(SDL_INIT_VIDEO);
-		TTF_Init();
-		IMG_Init(IMG_INIT_PNG);
 		SDL_DisplayMode current;
 
 		if (width == 0 && height == 0) { // fullscreen
@@ -44,13 +41,15 @@ namespace cshow {
 			sdlWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 				width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS);
 		}
-
-		SDL_GL_SetSwapInterval(0);
-
+		
 		if (sdlWindow == NULL) {
 			std::cout << "For some reason I cannot make a window..." << std::endl;
 			setRunning(false);
 		} else setRunning(true);
+		
+		SDL_GL_CreateContext(sdlWindow);
+		SDL_GL_SetSwapInterval(0);
+
 	}
 
 	void window::setRunning(bool running){
@@ -76,8 +75,5 @@ namespace cshow {
 
 	window::~window() {
 		SDL_DestroyWindow(sdlWindow);
-		IMG_Quit();
-		TTF_Quit();
-		SDL_Quit();
 	}
 }

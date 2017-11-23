@@ -42,7 +42,7 @@ namespace cshow {
 
 		public:
 			textline() = default;
-			textline(SDL_Renderer* renderer, const std::string& text, const vec3& background, const vec3& color, const vec2& position, uint32_t size);
+			textline(SDL_Renderer* renderer, const std::string& path, const std::string& text, const vec3& background, const vec3& color, const vec2& position, uint32_t size);
 			~textline();
 
 			void clear();

@@ -1,4 +1,5 @@
-CC = g++
+CC = g++ 
+CDB = -g
 CSTD = -std=c++11
 CBUILD = build/
 CFLAGS = -Wdeprecated-declarations -fdiagnostics-color -Wfatal-errors -w
@@ -9,6 +10,6 @@ CINCLUDES = -Iinclude/ -Iinclude/SDL -Iinclude/ffmpeg
 CRES = $(CBUILD)res/my.res
 
 all:
-	$(CC) $(CFLAGS) $(CSTD) -o $(CBUILD)cshow src/*.cpp $(CINCLUDES) $(CLIBFOLDERS) $(CSDLLIB) $(CFFMPEGLIB) $(CRES)
+	$(CC) $(CDB) $(CFLAGS) $(CSTD) -o $(CBUILD)cshow src/*.cpp $(CINCLUDES) $(CLIBFOLDERS) $(CSDLLIB) $(CFFMPEGLIB) $(CRES)
 				    
 

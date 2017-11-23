@@ -18,15 +18,18 @@
 #include "app.h"
 
 namespace cshow {
-
+	
 	app::app(slidemanager* manager):manager(manager){ }
 
     void app::run(const char* path, window& sdlWindow, const slidefilereader& reader){
         SDL_Event event;
         
 		std::string resPath(path, strlen(path) - strlen("cshow.exe"));
-		resPath.append("\\res\\");
+		std::string tmp00(resPath);
+		std::string fontPath = tmp00.append("font\\");
 
+		resPath.append("res\\");
+		std::cout << resPath << std::endl;
 		std::string cursorPath = resPath;
 		cursorPath.append("cursor.png");
 
@@ -38,13 +41,13 @@ namespace cshow {
 	    SDL_SetCursor(cursor);
 	    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 
-		reader.proccessFile(renderer, sdlWindow.getWidth(), sdlWindow.getHeight());
+		reader.proccessFile(renderer, fontPath, sdlWindow.getWidth(), sdlWindow.getHeight());
 
 		bool running = sdlWindow.getRunning();
 
 		while (running) {
 			SDL_Delay(1000 / 100); // reducing cpu usage ALOT, poor way to handle frame rate
-
+			render();
 			while (SDL_PollEvent(&event)) {
 
 				switch (event.type) {
@@ -74,7 +77,6 @@ namespace cshow {
 				}
 			}
 
-			render();
 		}
     }
 
@@ -101,10 +103,12 @@ namespace cshow {
     }
 
     app::~app(){
-		for(auto&& rect : trace) delete[] rect;
+		for(auto&& rect : trace) delete rect;
 		trace.clear();
 	    SDL_FreeCursor(cursor);
     	SDL_FreeSurface(cursorSurface);
+
+		SDL_DestroyRenderer(renderer);
     }
 
 }

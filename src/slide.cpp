@@ -51,8 +51,8 @@ namespace cshow {
 	}
 
 	slide::~slide() {
-		for(auto&& elem : staticComponents) delete[] elem;
-		for(auto&& elem : dynamicComponents) delete[] elem;
+		for(auto&& elem : staticComponents) delete elem;
+		for(auto&& elem : dynamicComponents) delete elem;
 		staticComponents.clear();
 		dynamicComponents.clear();
 	}

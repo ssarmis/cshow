@@ -271,7 +271,7 @@ namespace cshow {
 		}
 	}
 
-	void interpretSlideCode(SDL_Renderer* renderer, slide* currentSlide, const std::string& line) {
+	void interpretSlideCode(SDL_Renderer* renderer, const std::string& fontPath, slide* currentSlide, const std::string& line) {
 		// @TODO need to change this... so that it does ignore '#'
 		// add tab allower so that some lines can start with multiple tabs
 		if (line[0] == ':') {
@@ -308,7 +308,7 @@ namespace cshow {
 					if (color == NULL_VEC3) color = DEFAULT_VEC3; else DEFAULT_VEC3 = color;
 					if (position == NULL_VEC2) position = DEFAULT_VEC2; else DEFAULT_VEC2 = position;
 
-					currentSlide->staticComponents.emplace_back(new textline(renderer, text, background, color, position, size));
+					currentSlide->staticComponents.emplace_back(new textline(renderer, fontPath, text, background, color, position, size));
 
 					break;
 				}

@@ -19,16 +19,21 @@
 
 namespace cshow {
 
-	textline::textline(SDL_Renderer* renderer, const std::string& text, const vec3& background, const vec3& color, const vec2& position, uint32_t size)
+	textline::textline(SDL_Renderer* renderer, const std::string& fontPath, const std::string& text, const vec3& background, const vec3& color, const vec2& position, uint32_t size)
 		:text(text), color(color), position(position), size(size), renderer(renderer) {
 		
-		TTF_Font* Sans = TTF_OpenFont("fonts/Sansation-Bold.ttf", size);
+		std::string path(fontPath);
+		path.append("sans_bold.ttf");
+		
+		std::cout << path << std::endl;
+
+		TTF_Font* Sans = TTF_OpenFont(path.c_str(), size);
 		
 		//TTF_SetFontOutline(Sans, 2);
 
 		SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, 0);
 
-		TTF_SetFontHinting(Sans, TTF_HINTING_NORMAL);
+		//TTF_SetFontHinting(Sans, TTF_HINTING_NORMAL);
 
 		if (background.x != -1 && background.y != -1 && background.z != -1) {
 			surfaceMessage = TTF_RenderUTF8_Shaded(Sans, text.c_str(), { static_cast<uint8_t>(color.x), static_cast<uint8_t>(color.y), static_cast<uint8_t>(color.z), 255 },

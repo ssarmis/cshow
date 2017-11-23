@@ -38,7 +38,7 @@ namespace cshow {
 		public:
 			slidefilereader(slidemanager* manager, const char* path);
 			vec3 processHeader() const;
-			void proccessFile(SDL_Renderer* renderer, uint32_t width, uint32_t height) const;
+			void proccessFile(SDL_Renderer* renderer, const std::string& fontPath, uint32_t width, uint32_t height) const;
 	};
 
 }

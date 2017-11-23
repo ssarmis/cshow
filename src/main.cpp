@@ -20,10 +20,12 @@
 	#include <windows.h>
 	#undef main
 #else
-	#error "This cannot be build on other platforms other then windows at the moment"
+	#error "This cannot be build on other platforms other than windows at the moment"
 #endif
 
 #include <SDL.h>
+#include <SDL_ttf.h>
+#include <SDL_Image.h>
 #include <iostream>
 
 #include "window.h"
@@ -39,6 +41,9 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
+	SDL_Init(SDL_INIT_EVERYTHING);
+	TTF_Init();
+	IMG_Init(IMG_INIT_PNG);
 
 	cshow::slidemanager manager;
 	cshow::slidefilereader reader(&manager, argv[1]);
@@ -46,6 +51,14 @@ int main(int argc, char *argv[]) {
 	cshow::app App(&manager);
 
 	App.run(argv[0], sdlWindow, reader);
+
+	std::cout << SDL_GetError() << std::endl;
+	std::cout << TTF_GetError() << std::endl;
+	std::cout << IMG_GetError() << std::endl;
+
+	IMG_Quit();
+	TTF_Quit();
+	SDL_Quit();
 
 	return 0;
 }

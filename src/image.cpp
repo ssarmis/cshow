@@ -36,7 +36,7 @@ namespace cshow {
 	}
 
 	image::~image(){
-		SDL_DestroyTexture(texture);
+		//SDL_DestroyTexture(texture);
 	}
 
 }
