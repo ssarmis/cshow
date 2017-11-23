@@ -1,6 +1,6 @@
 //	cshow a simple slide show program.
 //
-//	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
+//	Copyright (C) 2017 Streanga Sarmis-Stefan.
 //
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
@@ -51,8 +51,8 @@ namespace cshow {
 	}
 
 	slide::~slide() {
-		for(auto&& elem : staticComponents) delete elem;
-		for(auto&& elem : dynamicComponents) delete elem;
+		for(auto&& elem : staticComponents) delete[] elem;
+		for(auto&& elem : dynamicComponents) delete[] elem;
 		staticComponents.clear();
 		dynamicComponents.clear();
 	}
@@ -70,11 +70,6 @@ namespace cshow {
 	void slide::renderStaticComponents(SDL_Renderer* renderer){
 		 for (std::list<staticcomponent*>::iterator i = staticComponents.begin(); i != staticComponents.end(); i++)
             ((staticcomponent*)*i)->render();
-		/*
-		for (uint32_t i = 0; i < images.size(); i++) images[i].render();
-		for (uint32_t i = 0; i < textLines.size(); i++) textLines[i].render();
-		for (uint32_t i = 0; i < rects.size(); i++) rects[i].render();
-		*/
 	}
 
 	void slide::renderDynamicComponents(SDL_Renderer* renderer){

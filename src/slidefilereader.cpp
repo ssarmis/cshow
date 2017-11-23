@@ -1,6 +1,6 @@
 //	cshow a simple slide show program.
 //
-//	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
+//	Copyright (C) 2017 Streanga Sarmis-Stefan.
 //
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
 
 namespace cshow {
 
-	slidefilereader::slidefilereader(const char* path) {
+	slidefilereader::slidefilereader(slidemanager* manager, const char* path):manager(manager) {
 		file = sreadfile(path);
 	}
 	
@@ -63,7 +63,7 @@ namespace cshow {
 			if (startInterprating) interpretSlideCode(renderer, newSlide, line);
 
 			if (line[0] == ':' && line[1] == 'e') {
-				slidemanager::pushSlideToQueue(newSlide);
+				manager->pushSlideToQueue(newSlide);
 				startInterprating = false;
 				newSlide = new slide(renderer, width, height);
 			}

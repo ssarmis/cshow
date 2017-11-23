@@ -1,6 +1,6 @@
 //	cshow a simple slide show program.
 //
-//	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
+//	Copyright (C) 2017 Streanga Sarmis-Stefan.
 //
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
@@ -75,7 +75,6 @@ namespace cshow {
 
 
 	window::~window() {
-		cshow::slidemanager::clearSlides();
 		SDL_DestroyWindow(sdlWindow);
 		IMG_Quit();
 		TTF_Quit();

@@ -1,6 +1,6 @@
 //	cshow a simple slide show program.
 //
-//	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
+//	Copyright (C) 2017 Streanga Sarmis-Stefan.
 //
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
@@ -19,16 +19,16 @@
 
 namespace cshow {
 
+	app::app(slidemanager* manager):manager(manager){ }
+
     void app::run(const char* path, window& sdlWindow, const slidefilereader& reader){
         SDL_Event event;
         
-		std::string resPath(path, strlen(path) - 9);
+		std::string resPath(path, strlen(path) - strlen("cshow.exe"));
 		resPath.append("\\res\\");
 
 		std::string cursorPath = resPath;
 		cursorPath.append("cursor.png");
-
-		std::cout << cursorPath << std::endl;
 
         renderer = SDL_CreateRenderer(sdlWindow.getWindow(), -1, SDL_RENDERER_ACCELERATED);
         
@@ -46,7 +46,6 @@ namespace cshow {
 			SDL_Delay(1000 / 100); // reducing cpu usage ALOT, poor way to handle frame rate
 
 			while (SDL_PollEvent(&event)) {
-				slidemanager::getCurrentSlide()->eventHandling(event);
 
 				switch (event.type) {
 					case SDL_KEYUP:
@@ -54,11 +53,11 @@ namespace cshow {
 
 					case SDL_KEYDOWN:
 						if (event.key.keysym.sym == SDLK_RIGHT) {
-							slidemanager::nextSlide();
+							manager->nextSlide();
 						}
 
 						if (event.key.keysym.sym == SDLK_LEFT) {
-							slidemanager::previousSlide();
+							manager->previousSlide();
 						}
 
 						if (event.key.keysym.sym == SDLK_ESCAPE) {
@@ -77,7 +76,6 @@ namespace cshow {
 
 			render();
 		}
-
     }
 
     void app::render() {
@@ -93,17 +91,17 @@ namespace cshow {
         if (SDL_GetMouseState(x, y) & SDL_BUTTON(SDL_BUTTON_RIGHT)){
 			for(auto&& rect : trace) delete rect;
 			trace.clear();
-            slidemanager::getCurrentSlide()->clearScreen(renderer);
+            manager->getCurrentSlide()->clearScreen(renderer);
         } 
 
-        slidemanager::getCurrentSlide()->render(renderer);
+        manager->getCurrentSlide()->render(renderer);
 
 		SDL_RenderPresent(renderer);
 
     }
 
     app::~app(){
-		for(auto&& rect : trace) delete rect;
+		for(auto&& rect : trace) delete[] rect;
 		trace.clear();
 	    SDL_FreeCursor(cursor);
     	SDL_FreeSurface(cursorSurface);

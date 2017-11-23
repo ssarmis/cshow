@@ -1,6 +1,6 @@
 //	cshow a simple slide show program.
 //
-//	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
+//	Copyright (C) 2017 Streanga Sarmis-Stefan.
 //
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
@@ -27,6 +27,7 @@
 #include <iostream>
 
 #include "window.h"
+#include "slidemanager.h"
 #include "app.h"
 
 
@@ -39,9 +40,10 @@ int main(int argc, char *argv[]) {
 	}
 
 
-	cshow::slidefilereader reader(argv[1]);
+	cshow::slidemanager manager;
+	cshow::slidefilereader reader(&manager, argv[1]);
 	cshow::window sdlWindow(reader.processHeader());
-	cshow::app App;
+	cshow::app App(&manager);
 
 	App.run(argv[0], sdlWindow, reader);
 

@@ -27,17 +27,17 @@ namespace cshow {
 	class slidemanager {
 
 		private:
-			static std::vector<slide*>	slideVector;
-			static uint32_t				index;
+			std::vector<slide*>		slideVector;
+			uint32_t				index;
 			
 		public:
 			slidemanager();
+			~slidemanager();
 
-			static slide* getCurrentSlide();
-			static void pushSlideToQueue(slide* slide);
-			static void nextSlide();
-			static void previousSlide();
-			static void clearSlides();
+			slide* getCurrentSlide();
+			void pushSlideToQueue(slide* slide);
+			void nextSlide();
+			void previousSlide();
 	};
 
 }

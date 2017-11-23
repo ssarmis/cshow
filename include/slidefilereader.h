@@ -31,11 +31,12 @@ namespace cshow {
 	class slidefilereader {
 
 		private:
+			slidemanager* 	manager;
 			bool			debug;
 			std::string		file;
 
 		public:
-			slidefilereader(const char* path);
+			slidefilereader(slidemanager* manager, const char* path);
 			vec3 processHeader() const;
 			void proccessFile(SDL_Renderer* renderer, uint32_t width, uint32_t height) const;
 	};

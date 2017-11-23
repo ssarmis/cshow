@@ -40,11 +40,12 @@ namespace cshow {
 	        SDL_Cursor*             cursor;
             SDL_Surface*            cursorSurface;
             SDL_Renderer*           renderer;
+            slidemanager*           manager;
             std::list<rectangle*>   trace;
 
         public:
             
-            app() = default;
+            app(slidemanager* manager);
             ~app();
 
             void run(const char* path, window& sdlWindow, const slidefilereader& reader);

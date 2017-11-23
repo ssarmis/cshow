@@ -1,6 +1,6 @@
 //	cshow a simple slide show program.
 //
-//	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
+//	Copyright (C) 2017 Streanga Sarmis-Stefan.
 //
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
@@ -19,10 +19,7 @@
 
 namespace cshow {
 
-	std::vector<slide*> slidemanager::slideVector;
-	uint32_t slidemanager::index = 0;
-
-	slidemanager::slidemanager() { }
+	slidemanager::slidemanager():index(0){}
 
 	slide* slidemanager::getCurrentSlide() {
 		return slideVector[index];
@@ -42,10 +39,11 @@ namespace cshow {
 		slideVector[index]->initSelect();
 	}
 
-	void slidemanager::clearSlides() {
+	slidemanager::~slidemanager() {
 		for (uint32_t i = 0; i < slideVector.size(); i++)
-			delete slideVector[i];
+			delete[] slideVector[i];
 		
 		slideVector.clear();
+		std::cout << slideVector.size() << std::endl;
 	}
 }
