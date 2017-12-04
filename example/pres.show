@@ -18,7 +18,7 @@
 :t :p 20 148    :c $tcolor      :s 32 "- simple"
 :t :p 20 180    :c $tcolor      :s 32 "- fast"
 
-# :i :p 256 10    :s 1008 749     "imgs/00.png"
+:i :p 256 10    :s 1008 749     "imgs/00.png"
 
 :e
 
@@ -38,7 +38,7 @@
 :t :p 20 308    :c $tcolor              :s 32 "- choose whether you want it fullscreen or borderless"
 :t :p 20 340    :c $tcolor              :s 32 "- has variables"
 
-#:vi :p 400 350 :s 480 340 "vids/00.mp4"
+:vi :p 400 350 :s 480 340 "vids/00.mp4"
 
 :e
 

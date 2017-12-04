@@ -29,7 +29,7 @@ namespace cshow {
 		std::string fontPath = tmp00.append("font\\");
 
 		resPath.append("res\\");
-		std::cout << resPath << std::endl;
+		
 		std::string cursorPath = resPath;
 		cursorPath.append("cursor.png");
 

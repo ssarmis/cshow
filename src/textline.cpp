@@ -25,8 +25,6 @@ namespace cshow {
 		std::string path(fontPath);
 		path.append("sans_bold.ttf");
 		
-		std::cout << path << std::endl;
-
 		TTF_Font* Sans = TTF_OpenFont(path.c_str(), size);
 		
 		//TTF_SetFontOutline(Sans, 2);

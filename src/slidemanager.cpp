@@ -40,16 +40,14 @@ namespace cshow {
 	}
 	
 	slidemanager::slidemanager(const slidemanager& other){
-		std::cout << "I am being copied.";
 		exit(1);
 	}
 
 	slidemanager::~slidemanager() {
-		std::cout << slideVector.size() << std::endl;
+	
 		for (uint32_t i = 0; i < slideVector.size(); i++)
 			delete slideVector[i];
 		
 		slideVector.clear();
-		std::cout << slideVector.size() << std::endl;
 	}
 }

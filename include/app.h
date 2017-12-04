@@ -1,6 +1,6 @@
 //	cshow a simple slide show program.
 //
-//	Copyright (C) 2017 Stephancode(Streanga Sarmis-Stefan).
+//	Copyright (C) 2017 Streanga Sarmis-Stefan.
 //
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
@@ -35,13 +35,13 @@ namespace cshow {
     class app {
 
         private:
-            int32_t                 x[1], y[1];
-            rectangle               mouseRect;
-	        SDL_Cursor*             cursor;
-            SDL_Surface*            cursorSurface;
-            SDL_Renderer*           renderer;
-            slidemanager*           manager;
-            std::list<rectangle*>   trace;
+            int32_t				x[1], y[1];
+            rectangle				mouseRect;
+	        SDL_Cursor*			cursor;
+            SDL_Surface*			cursorSurface;
+            SDL_Renderer*			renderer;
+            slidemanager*			manager;
+            std::list<rectangle*>	trace;
 
         public:
             
