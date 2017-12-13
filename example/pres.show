@@ -26,19 +26,9 @@
 
 :b :c $bgcolor
 
-:t :p $title_pos        :c $shcolor     :s 64 "What it can do" 
-:t :p $shtitle_pos      :c $tcolor      :s 64 "What it can do"
+:t :p 200 400        :c $tcolor     :s 64 "What it can do ->" 
 
-:t :p 20 116    :c $tcolor              :s 32 "- looks good (sometimes)"
-:t :p 20 148    :c $tcolor              :s 32 "- supports videos"
-:t :p 20 180    :c $tcolor   :b 0 0 0   :s 32 "- text with the background color of your choice"
-:t :p 20 212    :c $tcolor              :s 32 "- custom 32x32 cursor"
-:t :p 20 244    :c $tcolor              :s 32 "- draw with your mouse on the slide"
-:t :p 20 276    :c $tcolor              :s 32 "- insert images"
-:t :p 20 308    :c $tcolor              :s 32 "- choose whether you want it fullscreen or borderless"
-:t :p 20 340    :c $tcolor              :s 32 "- has variables"
 
-:vi :p 400 350 :s 480 340 "vids/00.mp4"
 
 :e
 
@@ -46,17 +36,64 @@
 
 :b :c $bgcolor
 
-:t :p $title_pos        :c $shcolor     :s 64 "How to use it" 
-:t :p $shtitle_pos      :c $tcolor      :s 64 "How to use it"
-
-:t :p 20 116                :c $tcolor      :s 54 "Making a slide"
-
-:t :p 20 170  :b 20 20 20   :c $tcolor      :s 32 ":s"
-:t :p 112 170               :c $tcolor      :s 32 "<- marks the beginning of a slide"
-
-# Bugs everywhere, I am so happy
-
-:t :p 20 202  :b 20 20 20   :c $tcolor      :s 32 ":e"
-:t :p 112 202               :c $tcolor      :s 32 "<- marks the end of a slide"
+:t :p 200 400      :c $tcolor      :s 64 "It supports text of different"
+:t :p 200 464      :c 100 0 100    :s 64 "colors and"
+:t :p 200 528      :c 0 100 100    :b 50 50 50   :s 64 "backgrounds"
 
 :e
+
+:s
+
+:b :c $bgcolor
+
+:t :p 200 400      :c $tcolor      :s 64 "Images"
+
+:i :p 400 400  :s 238 400 "imgs/01.png"
+
+:e
+
+:s
+
+:b :c $bgcolor
+
+:t :p 200 400      :c $tcolor      :s 64 "Rectangles"
+
+:r :p 800 400   :s 238 450      :c 255 0 100
+:i :p 800 400   :s 238 400      "imgs/01.png"
+:r :p 100 50    :s 100 250      :c 100 0 100
+:r :p 500 150   :s 100 50       :c 0 0 100
+
+:e
+
+:s
+
+:b :c $bgcolor
+
+:t :p $title_pos        :c $shcolor     :s 64 "Videos" 
+:t :p $shtitle_pos      :c $tcolor      :s 64 "Videos"
+
+:vi :p 450 200     :s 960 680      "vids/00.mp4"
+
+:e
+
+
+:s
+
+:b :c $bgcolor
+
+:t :p $title_pos        :c $shcolor     :s 64 "Whats left" 
+:t :p $shtitle_pos      :c $tcolor      :s 64 "Whats left"
+
+:t :p 20 116    :c $tcolor              :s 32 "- looks good (sometimes)"
+:t :p 20 148    :c $tcolor              :s 32 "- supports variables"
+:t :p 20 180    :c $tcolor              :s 32 "- fullscreen or borderless"
+
+:e
+
+
+
+# :t :p 20 212    :c $tcolor              :s 32 "- custom 32x32 cursor"
+# :t :p 20 244    :c $tcolor              :s 32 "- draw with your mouse on the slide"
+# :t :p 20 276    :c $tcolor              :s 32 "- insert images"
+# :t :p 20 308    :c $tcolor              :s 32 "- choose whether you want it fullscreen or borderless"
+# :t :p 20 340    :c $tcolor              :s 32 "- has variables"
