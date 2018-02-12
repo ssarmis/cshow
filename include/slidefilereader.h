@@ -1,6 +1,6 @@
 //	cshow a simple slide show program.
 //
-//	Copyright (C) 2017 Streanga Sarmis-Stefan<streangasarmis@gmail.com>
+//	Copyright (C) 2018 Streanga Sarmis-Stefan<streangasarmis@gmail.com>
 //
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by

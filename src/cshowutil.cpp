@@ -1,6 +1,6 @@
 //	cshow a simple slide show program.
 //
-//	Copyright (C) 2017 Streanga Sarmis-Stefan<streangasarmis@gmail.com>
+//	Copyright (C) 2018 Streanga Sarmis-Stefan<streangasarmis@gmail.com>
 //
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
@@ -37,7 +37,9 @@ namespace cshow {
 	// @TODO maybe change the return type to bool and see
 	// if there were any problems in clearing the memory
 	template<class T> void cclearv(std::vector<T>& vector) {
-		for (uint32_t i = 0; i < vector.size(); i++) vector[i].clear();
+		for (uint32_t i = 0; i < vector.size(); i++){
+			vector[i].clear();
+		}
 		vector.clear();
 	}
 
@@ -72,20 +74,31 @@ namespace cshow {
 		std::stringstream ss(line.substr(++index, line.size()));
 
 		for (uint32_t i = 0; i < 1; i++) {
-			while ((line[tmpIndex] == ' ' || line[tmpIndex] == '\t')) tmpIndex++; // skips spaces and tabs
+			while ((line[tmpIndex] == ' ' || line[tmpIndex] == '\t')) {
+				tmpIndex++; // skips spaces and tabs
+			}
+
 			if (line[tmpIndex] == '$') {
 				r[i] = true;
 				std::string variableName;
 				std::stringstream getName(line.substr(++tmpIndex, line.size()));
 				getName >> variableName;
 				arg[i] = ivariablesMap[variableName];
-				if (ivariablesMap.find(variableName) == ivariablesMap.end())  std::cout << variableName << " could not be found." << std::endl;
+				if (ivariablesMap.find(variableName) == ivariablesMap.end()) {
+					std::cout << variableName 
+					<< " could not be found." << std::endl;
+				}
 			}
-			while (line[tmpIndex] != '$' && line[tmpIndex] != ':' && line[tmpIndex] != '\"' && line[tmpIndex] != '\n' && tmpIndex < line.size()) tmpIndex++;
+
+			while (line[tmpIndex] != '$' && line[tmpIndex] != ':' 
+				&& line[tmpIndex] != '\"' && line[tmpIndex] != '\n' && tmpIndex < line.size()) {
+				tmpIndex++;
+			}
 		}
 
-		if (!r[0])
+		if (!r[0]){
 			ss >> arg[0];
+		}
 
 		if (arg[0] == -1) {
 			std::cout << "line " << line << " < Please provide 1 argument to the size parameter :)" << std::endl;
@@ -104,7 +117,10 @@ namespace cshow {
 		uint32_t tmpIndex = index;
 
 		for (uint32_t i = 0; i < 2; i++) {
-			while ((line[tmpIndex] == ' ' || line[tmpIndex] == '\t')) tmpIndex++;
+			while ((line[tmpIndex] == ' ' || line[tmpIndex] == '\t')) {
+				tmpIndex++;
+			}
+
 			if (line[tmpIndex] == '$') {
 				std::string variableName;
 				std::stringstream getName(line.substr(++tmpIndex, line.size()));
@@ -112,28 +128,36 @@ namespace cshow {
 				if (ivariablesMap.find(variableName) != ivariablesMap.end()) {
 					r[i] = true;
 					arg[i] = ivariablesMap[variableName];
-				}
-				else if (v2variablesMap.find(variableName) != v2variablesMap.end()) {
+				} else if (v2variablesMap.find(variableName) != v2variablesMap.end()) {
 					r[0] = true;
 					r[1] = true;
 					arg[0] = v2variablesMap[variableName].x;
 					arg[1] = v2variablesMap[variableName].y;
 					break;
+				} else {
+					std::cout << variableName << " could not be found." << std::endl;
 				}
-				else std::cout << variableName << " could not be found." << std::endl;
 				tmpIndex += variableName.size();
 			}
-			while (line[tmpIndex] != '$' && line[tmpIndex] != ':' && line[tmpIndex] != '\"' && line[tmpIndex] != '\n' && tmpIndex < line.size()) tmpIndex++;
+			while (line[tmpIndex] != '$' && line[tmpIndex] != ':' && line[tmpIndex] != '\"'
+				 && line[tmpIndex] != '\n' && tmpIndex < line.size()) {
+				tmpIndex++;
+			}
 		}
 
 		std::string garbage;
 		if (r[0] && r[1]) {}
-		else if (r[0] && !r[1]) ss >> garbage >> arg[1];
-		else if (!r[0] && r[1]) ss >> arg[0];
-		else ss >> arg[0] >> arg[1];
+		else if (r[0] && !r[1]){
+			ss >> garbage >> arg[1];
+		} else if (!r[0] && r[1]){
+			ss >> arg[0];
+		} else {
+			ss >> arg[0] >> arg[1];
+		}
 
 		if (arg[0] == -1 || arg[1] == -1) {
-			std::cout << "line " << line << " < Please provide 2 numbers to the parameter :)" << arg[0] << arg[1] << std::endl;
+			std::cout << "line " << line << " < Please provide 2 numbers to the parameter :)" 
+				<< arg[0] << arg[1] << std::endl;
 			return false;
 		}
 		toChange = vec2(arg[0], arg[1]);
@@ -147,7 +171,10 @@ namespace cshow {
 		int32_t arg[3] = { -1, -1, -1 };
 
 		for (uint32_t i = 0; i < 3; i++) {
-			while ((line[tmpIndex] == ' ' || line[tmpIndex] == '\t')) tmpIndex++;
+			while ((line[tmpIndex] == ' ' || line[tmpIndex] == '\t')) {
+				tmpIndex++;
+			}
+			
 			if (line[tmpIndex] == '$') {
 				r[i] = true;
 				std::string variableName;
@@ -156,8 +183,7 @@ namespace cshow {
 				if (ivariablesMap.find(variableName) != ivariablesMap.end()) {
 					r[i] = true;
 					arg[i] = ivariablesMap[variableName];
-				}
-				else if (v3variablesMap.find(variableName) != v3variablesMap.end()) {
+				} else if (v3variablesMap.find(variableName) != v3variablesMap.end()) {
 					r[0] = true;
 					r[1] = true;
 					r[2] = true;
@@ -165,25 +191,38 @@ namespace cshow {
 					arg[1] = v3variablesMap[variableName].y;
 					arg[2] = v3variablesMap[variableName].z;
 					break;
+				} else {
+					std::cout << variableName << " could not be found." << std::endl;
 				}
-				else std::cout << variableName << " could not be found." << std::endl;
 				tmpIndex += variableName.size();
 			}
-			while (line[tmpIndex] != '$' && line[tmpIndex] != ':' && line[tmpIndex] != '\"' && line[tmpIndex] != '\n' && tmpIndex < line.size()) tmpIndex++;
+			while (line[tmpIndex] != '$' && line[tmpIndex] != ':' && line[tmpIndex] != '\"'
+				&& line[tmpIndex] != '\n' && tmpIndex < line.size()){
+				tmpIndex++;
+			} 
 		}
 
 		std::string garbage;
 		if (r[0] && r[1] && r[2]) {}
-		else if (r[0] && !r[1] && !r[2]) ss >> garbage >> arg[1] >> arg[2];
-		else if (!r[0] && r[1] && !r[2]) ss >> arg[0] >> garbage >> arg[2];
-		else if (!r[0] && !r[1] && r[2]) ss >> arg[0] >> arg[1] >> garbage;
-		else if (r[0] && r[1] && !r[0]) ss >> garbage >> garbage >> arg[2];
-		else if (!r[0] && r[1] && r[0]) ss >> arg[0] >> garbage >> garbage;
-		else if (r[0] && !r[1] && r[0]) ss >> garbage >> arg[1] >> garbage;
-		else ss >> arg[0] >> arg[1] >> arg[2];
+		else if (r[0] && !r[1] && !r[2]){
+			ss >> garbage >> arg[1] >> arg[2];
+		} else if (!r[0] && r[1] && !r[2]) {
+			ss >> arg[0] >> garbage >> arg[2];
+		} else if (!r[0] && !r[1] && r[2]) {
+			ss >> arg[0] >> arg[1] >> garbage;
+		} else if (r[0] && r[1] && !r[0]) {
+			ss >> garbage >> garbage >> arg[2];
+		} else if (!r[0] && r[1] && r[0]) {
+			ss >> arg[0] >> garbage >> garbage;
+		} else if (r[0] && !r[1] && r[0]) {
+			ss >> garbage >> arg[1] >> garbage;
+		} else {
+			ss >> arg[0] >> arg[1] >> arg[2];
+		}
 
 		if (arg[0] == -1 || arg[1] == -1 || arg[2] == -1) {
-			std::cout << "line " << line << " < Please provide 3 numbers to the parameter :)" << arg[0] << arg[1] << arg[2] << std::endl;
+			std::cout << "line " << line << " < Please provide 3 numbers to the parameter :)" 
+				<< arg[0] << arg[1] << arg[2] << std::endl;
 			return false;
 		}
 		toChange = vec3(arg[0], arg[1], arg[2]);
@@ -301,14 +340,27 @@ namespace cshow {
 						checkTextLineParams(wline, 0, text, background, color, position, size);
 					}
 				
-					for (uint32_t i = st + 1; i < fn; i++) ss << line[i];
+					for (uint32_t i = st + 1; i < fn; i++){
+						ss << line[i];
+					} 
+
 					text = ss.str();
 
 					// If needed to change the default values, heres where
-					if (color == NULL_VEC3) color = DEFAULT_VEC3; else DEFAULT_VEC3 = color;
-					if (position == NULL_VEC2) position = DEFAULT_VEC2; else DEFAULT_VEC2 = position;
+					if (color == NULL_VEC3) {
+						color = DEFAULT_VEC3;
+					} else {
+						DEFAULT_VEC3 = color;
+					}
+					
+					if (position == NULL_VEC2) {
+						position = DEFAULT_VEC2;
+					} else {
+						DEFAULT_VEC2 = position;
+					}
 
-					currentSlide->staticComponents.emplace_back(new textline(renderer, fontPath, text, background, color, position, size));
+					currentSlide->staticComponents.emplace_back(new textline(renderer, fontPath, text,
+						background, color, position, size));
 
 					break;
 				}
@@ -321,10 +373,15 @@ namespace cshow {
 
 					std::stringstream ss;
 
-					while (std::getline(cpy, wline, ':'))
+					while (std::getline(cpy, wline, ':')){
 						checkColorParams(wline, 0, color);
+					}
 
-					if (color == NULL_VEC3) color = DEFAULT_VEC3; else DEFAULT_VEC3 = color;
+					if (color == NULL_VEC3) {
+						color = DEFAULT_VEC3;
+					} else {
+						DEFAULT_VEC3 = color;
+					}
 
 					currentSlide->setBackground(color);
 
@@ -350,11 +407,23 @@ namespace cshow {
 						checkImageParams(wline, 0, position, size);
 					}
 
-					for (uint32_t i = st + 1; i < fn; i++) ss << line[i];
+					for (uint32_t i = st + 1; i < fn; i++) {
+						ss << line[i];
+					}
+
 					path = ss.str();
 
-					if (size == NULL_VEC2) size = DEFAULT_VEC2; else DEFAULT_VEC2 = size;
-					if (position == NULL_VEC2) position = DEFAULT_VEC2; else DEFAULT_VEC2 = position;
+					if (size == NULL_VEC2) {
+						size = DEFAULT_VEC2;
+					} else {
+						DEFAULT_VEC2 = size;
+					}
+
+					if (position == NULL_VEC2) {
+						position = DEFAULT_VEC2;
+					} else {
+						DEFAULT_VEC2 = position;
+					}
 
 					currentSlide->staticComponents.emplace_back(new image(renderer, path, position, size));
 
@@ -381,11 +450,23 @@ namespace cshow {
 							checkVideoParams(wline, 0, position, size);
 						}
 
-						for (uint32_t i = st + 1; i < fn; i++) ss << line[i];
+						for (uint32_t i = st + 1; i < fn; i++) {
+							ss << line[i];
+						}
+
 						path = ss.str();
 
-						if (size == NULL_VEC2) size = DEFAULT_VEC2; else DEFAULT_VEC2 = size;
-						if (position == NULL_VEC2) position = DEFAULT_VEC2; else DEFAULT_VEC2 = position;
+						if (size == NULL_VEC2) {
+							size = DEFAULT_VEC2;
+						} else {
+							DEFAULT_VEC2 = size;
+						}
+
+						if (position == NULL_VEC2) {
+							position = DEFAULT_VEC2;
+						} else {
+							DEFAULT_VEC2 = position;
+						}
 
 						currentSlide->dynamicComponents.emplace_back(new video(renderer, path, position, size));
 						//currentSlide.noRefresh();
@@ -410,8 +491,17 @@ namespace cshow {
 					}
 
 					// If needed to change the default values, heres where
-					if (color == NULL_VEC3) color = DEFAULT_VEC3; else DEFAULT_VEC3 = color;
-					if (position == NULL_VEC2) position = DEFAULT_VEC2; else DEFAULT_VEC2 = position;
+					if (color == NULL_VEC3) {
+						color = DEFAULT_VEC3;
+					} else {
+						DEFAULT_VEC3 = color;
+					}
+
+					if (position == NULL_VEC2) {
+						position = DEFAULT_VEC2;
+					} else {
+						DEFAULT_VEC2 = position;
+					}
 
 					currentSlide->staticComponents.emplace_back(new rectangle(renderer, position, background, size));
 
@@ -480,7 +570,8 @@ namespace cshow {
 
 					break;
 				}
-				}
+			}
+
             break;
 			}
 
